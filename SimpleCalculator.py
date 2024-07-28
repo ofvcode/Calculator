@@ -3,6 +3,8 @@ from tkinter import *
 
 root=Tk()
 root.title("Calculator Program")
+root.geometry("370x460")
+root.resizable(False, False)
 e = Entry(root, width=35,borderwidth=5)
 e.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
 
