@@ -5,8 +5,14 @@ root=Tk()
 root.title("Calculator Program")
 e = Entry(root, width=35,borderwidth=5)
 e.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
-Label = Label(root, text=" Calculator Made by OFV")
-Label.grid(row=0, column = 5)
+
+button_Add = False
+
+button_Subtract = False
+
+button_Divide = False
+
+button_Multiply = False
 
 FirstNumber = 0
 def button_click(number):
@@ -19,14 +25,58 @@ def button_clear():
    
 def button_add():
     global FirstNumber 
-    FirstNumber = int(e.get())
+    FirstNumber = float(e.get())
+    button_clear()
+    global button_Add
+    button_Add = True
+    button_clear()
+    
+def buttonSubtract():
+    global FirstNumber 
+    FirstNumber = float(e.get())
+    button_clear()
+    global button_Subtract
+    button_Subtract = True
+    button_clear()
+    
+def buttonMultiply():
+    global FirstNumber 
+    FirstNumber = float(e.get())
+    button_clear()
+    global button_Multiply
+    button_Multiply = True
     button_clear()
     
     
+def buttonDivide():
+    global FirstNumber 
+    FirstNumber = float(e.get())
+    button_clear()
+    global button_Divide
+    button_Divide = True
+    button_clear()
+
 def button_Equal():
-    SecondNumber = int(e.get())
+    SecondNumber = float(e.get())
     button_clear()
-    e.insert(0, str((FirstNumber) + (SecondNumber))) 
+    global button_Divide
+    global button_Multiply
+    global button_Add
+    global button_Subtract
+    if button_Divide == True:
+        e.insert(0, str((FirstNumber) / (SecondNumber))) 
+        button_Divide = False
+    elif button_Multiply == True:
+        e.insert(0, str((FirstNumber) * (SecondNumber)))
+        button_Multiply = False
+    elif button_Add == True:
+        e.insert(0, str((FirstNumber) + (SecondNumber)))
+        button_Add = False
+    elif button_Subtract == True:
+        e.insert(0, str((FirstNumber) - (SecondNumber)))
+        button_Subtract = False
+     
+        
     
 #Define Buttons
 Button1 = Button(root, text="1", padx = 40, pady= 20 ,command=lambda: button_click(1))
@@ -42,6 +92,9 @@ Button0 = Button(root, text="0", padx = 40, pady= 20 ,command=lambda: button_cli
 buttonAdd = Button(root, text="+", padx = 40, pady= 20 ,command=lambda: button_add())
 buttonEqual = Button(root, text="=", padx = 91, pady= 20 ,command=button_Equal)
 buttonClear = Button(root, text="Clear", padx = 91, pady= 20 ,command=button_clear)
+buttonnSubtract = Button(root, text="-", padx = 40, pady= 20 ,command=lambda: buttonSubtract())
+buttonnMultiply = Button(root, text="*", padx = 40, pady= 20 ,command=lambda: buttonMultiply())
+buttonnDivide = Button(root, text="/", padx = 40, pady= 20 ,command=lambda: buttonDivide())
 
 # Put the buttons on the screen
 Button1.grid(row=3, column=0)
@@ -56,7 +109,11 @@ Button7.grid(row=1, column=0)
 Button8.grid(row=1, column=1)
 Button9.grid(row=1, column=2)
 Button0.grid(row=4, column=0)
+
 buttonClear.grid(row=4, column=1, columnspan=2)
 buttonAdd.grid(row=5, column=0)
+buttonnDivide.grid(row=6, column=2)
+buttonnMultiply.grid(row=6, column=1)
+buttonnSubtract.grid(row=6, column=0)
 buttonEqual.grid(row=5, column=1, columnspan=2)
 root.mainloop()
