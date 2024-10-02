@@ -1,4 +1,4 @@
-Really simple calculator that can only do addition.
+Really simple calculator
 
 Dependencies : 
 Python
